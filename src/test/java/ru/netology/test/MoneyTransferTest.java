@@ -44,7 +44,6 @@ public class MoneyTransferTest {
 
     @Test
     public void shouldTransferMoneyFromSecondToFirst() {
-
         int amount = 7000;
         val cardBalance = new CardBalance();
         val firstCardBalanceStart = cardBalance.getFirstCardBalance();
@@ -81,4 +80,3 @@ public class MoneyTransferTest {
         transactionPage.invalidCard();
     }
 }
-
