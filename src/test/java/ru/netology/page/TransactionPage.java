@@ -24,18 +24,23 @@ public class TransactionPage {
         addMoneyHeading.shouldBe(Condition.visible, ofSeconds(10));
     }
 
-    public CardBalance makeValidTransfer(String amountToTransfer, DataHelper.CardInfo cardInfo) {
-        makeTransfer(amountToTransfer, cardInfo);
+    private void fieldClearing() {
+        amountField.sendKeys(Keys.CONTROL + "a");
+        amountField.sendKeys(Keys.DELETE);
+        fromField.sendKeys(Keys.CONTROL + "a");
+        fromField.sendKeys(Keys.DELETE);
+    }
+
+
+    public CardBalance validTransfer(String amountTransfer, DataHelper.CardInfo cardInfo) {
+        amountField.setValue(amountTransfer);
+        fromField.setValue(cardInfo.getCardNumber());
+        uploadButton.click();
         return new CardBalance();
     }
 
-    public void makeTransfer(String amountToTransfer, DataHelper.CardInfo cardInfo) {
-        amountField.setValue(amountToTransfer);
-        fromField.setValue(cardInfo.getCardNumber());
-        uploadButton.click();
+    public void findErrorMessage (String expectedText) {
+        errorMessage.shouldHave(exactText(expectedText), Duration.ofSeconds(20)).shouldBe(visible);
     }
 
-    public void findErrorMessage(String expectedText) {
-        errorMessage.shouldHave(exactText(expectedText), Duration.ofSeconds(15)).shouldBe(visible);
-    }
 }

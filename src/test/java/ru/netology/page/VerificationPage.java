@@ -16,7 +16,7 @@ public class VerificationPage {
     private SelenideElement errorBox = $("[data-test-id=error-notification]");
 
     public VerificationPage() {
-        codeField.shouldBe(visible);
+        codeField.shouldBe(Condition.visible);
     }
 
     public CardBalance validVerify(DataHelper.VerificationCode verificationCode) {

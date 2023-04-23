@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class CardBalance {
     private SelenideElement heading = $("[data-test-id=dashboard]");
-    private ElementsCollection cards = $$(".list__item");
+    private ElementsCollection cards = $$(".list__item div");
     private final String balanceStart = "баланс: ";
     private final String balanceFinish = " р.";
 
@@ -28,9 +28,11 @@ public class CardBalance {
     }
 
     public TransactionPage selectCardToTransfer(DataHelper.CardInfo cardInfo) {
-        cards.findBy(attribute("data-test-id", cardInfo.getTestId())).$("button").click();
+        cards.findBy(attribute("data-test-id", cardInfo.getCardId())).$("button").click();
         return new TransactionPage();
     }
+
+
 
     private int extractBalance(String text) {
         var start = text.indexOf(balanceStart);
